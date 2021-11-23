@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="block-products-columns__title">{{ 'HEADER_TOP_RATED'|translate }}</div>
+            <div class="block-products-columns__list">
+                <div *ngFor="let product of topRatedProducts" class="block-products-columns__list-item">
+                    <app-product-card
+                        [product]="product"
+                        [exclude]="['actions', 'status-badge', 'features', 'buttons', 'meta']"
+                    ></app-product-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="block-products-columns__title">{{ 'HEADER_BESTSELLERS'|translate }}</div>
+            <div class="block-products-columns__list">
+                <div *ngFor="let product of bestProducts" class="block-products-columns__list-item">
+                    <app-product-card
+                        [product]="product"
+                        [exclude]="['actions', 'status-badge', 'features', 'buttons', 'meta']"
+                    ></app-product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+        <h5>{{ 'HEADER_ORDER_HISTORY'|translate }}</h5>
+    </div>
+    <ng-container *ngIf="list">
+        <div class="card-divider"></div>
+        <div class="card-table">
+            <div class="table-responsive-sm">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>{{ 'TABLE_NUMBER'|translate }}</th>
+                        <th>{{ 'TABLE_DATE'|translate }}</th>
+                        <th>{{ 'TABLE_STATUS'|translate }}</th>
+                        <th>{{ 'TABLE_TOTAL'|translate }}</th>
+                        <th>{{ 'TABLE_REFUND'|translate }}</th>
+                        <th>{{ 'TABLE_REVIEW'|translate }}</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let order of OrderList">
+                        <td>
+                            <a>
+                                {{ 'FORMAT_ORDER_NUMBER'|translate:{number: order.SERIAL_NB} }}
+                            </a>
+                        </td>
+                        <td>{{ 'FORMAT_DATE_MEDIUM'|translate:{date: order.ENTRY_DATE} }}</td>
+                        <td>{{ order.My_Status.STATUS_TYPE}}</td>
+                        <td>{{ 'TEXT_ORDER_TOTAL'|translate:{total: order.TOTAL_ITEM_PRICE, quantity: order.QUANTITY} }}</td>
+                        <td *ngIf="order.refundable" (click)="refundOrder(order)"><a class="refundButton">Refund</a></td>
+                        <td *ngIf="!order.refundable"></td>
+                        <td *ngIf="order.My_Status.STATUS_TYPE == 'Delivered'">
+                            <input type="number" min=0 max=5 [(ngModel)]="RateNumber" pattern="[1-5]"> /5
+                        </td>
+                        <td *ngIf="order.My_Status.STATUS_TYPE == 'Delivered'" (click)="updateRating(order)" ><i class="fas fa-arrow-right"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-divider"></div>
+        <!-- <div class="card-footer">
+            <app-pagination [formControl]="currentPage" [siblings]="2" [total]="list.pages"></app-pagination>
+        </div> -->
+    </ng-container>
+</div>

@@ -1,0 +1,36 @@
+<ng-container appAddToCart appAddToWishlist appAddToCompare>
+
+    <div class="product-card__image">
+        <div class="image image--type--product">
+            <a class="image__body">
+                <img class="image__tag" src="../../../../../assets/images/fuel.jfif" />
+            </a>
+        </div>
+    </div>
+
+    <div class="product-card__info">
+        <div class="product-card__name">
+            <div style="text-align: center;">
+                <h3>Coral</h3>
+            </div>
+        </div>
+        <div  class="product-card__meta" style="text-align: center; font-size: large;">
+            <span class="product-card__meta-title">Location: </span> Ser3el
+        </div>
+
+        <div class="product-card__rating">
+            <!-- <app-rating class="product-card__rating-stars" ></app-rating> -->
+            <div class="product-card__rating-label">
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card__footer" style="display: flex; justify-content: center;">
+        <ng-container>
+            <button type="button" class='btn btn-primary' [attr.aria-label]="'BUTTON_ADD_TO_CART'|translate" (click)="openModal()">
+                Make An Appoitement
+            </button>
+
+        </ng-container>
+    </div>
+</ng-container>

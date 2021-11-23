@@ -1,0 +1,99 @@
+<ng-container
+    appAddToCart
+    appAddToWishlist
+    appAddToCompare
+    #cart="addToCart"
+    #wishlist="addToWishlist"
+>
+    <div class="product-card__actions-list">
+        <button
+            class="product-card__action product-card__action--quickview"
+            type="button"
+            [class.product-card__action--loading]="showingQuickview"
+            [attr.aria-label]="'BUTTON_QUICKVIEW'|translate"
+            (click)="showQuickview()"
+        >
+            <app-icon icon="quickview-16"></app-icon>
+        </button>
+        <ng-container *ngIf="!exclude.includes('actions')">
+            <button
+                type="button"
+                class="product-card__action product-card__action--wishlist"
+                [class.product-card__action--loading]="wishlist.inProgress"
+                [attr.aria-label]="'BUTTON_ADD_TO_WISHLIST'|translate"
+                (click)="AddToWishList(product)"
+            >
+                <app-icon icon="wishlist-16"></app-icon>
+            </button>
+        </ng-container>
+    </div>
+
+    <div class="product-card__image">
+        <div class="image image--type--product">
+            <a class="image__body">
+                <img class="image__tag" [src]="product.My_Uploaded_files[0].My_URL"   (click)="showQuickview()"/>
+            </a>
+        </div>
+    </div>
+
+    <div class="product-card__info">
+        <div  class="product-card__meta">
+            <span class="product-card__meta-title">{{ 'TEXT_SKU'|translate }}:</span> {{ product.PRODUCT_SERIAL_NB }}
+        </div>
+
+        <div class="product-card__name">
+            <div>
+                <a>{{ product.PRODUCT_NAME }}</a>
+            </div>
+        </div>
+
+        <div class="product-card__rating">
+            <app-rating class="product-card__rating-stars" [value]="product.AVERAGE_RATE_REVIEW"></app-rating>
+            <div class="product-card__rating-label">
+                <!-- {{ 'TEXT_RATING_LABEL'|translate:{rating: product.rating, reviews: product.reviews} }} -->
+            </div>
+        </div>
+    </div>
+
+    <div class="product-card__footer">
+        <div class="product-card__prices">
+            <ng-container *ngIf="product.DISCOUNTED_PRICE">
+                <div class="product-card__price product-card__price--new">{{ product.DISCOUNTED_PRICE }} $</div>
+                <div class="product-card__price product-card__price--old">{{ product.PRODUCT_PRICE }} $ </div>
+            </ng-container>
+            <ng-container *ngIf="!product.DISCOUNTED_PRICE">
+                <div class="product-card__price product-card__price--current">{{ product.PRODUCT_PRICE }} $</div>
+            </ng-container>
+        </div>
+        <ng-container *ngIf="!exclude.includes('buttons')">
+            <button
+                type="button"
+                class="product-card__addtocart-icon"
+                [class.product-card__addtocart-icon--loading]="cart.inProgress"
+                [attr.aria-label]="'BUTTON_ADD_TO_CART'|translate"
+                (click) = "AddToCardList(product)"
+            >
+                <app-icon icon="cart-20"></app-icon>
+            </button>
+            <ng-container *ngIf="!exclude.includes('list-buttons')">
+                <button
+                    type="button"
+                    class="product-card__addtocart-full"
+                    [class.product-card__addtocart-full--loading]="cart.inProgress"
+                    (click) = "AddToCardList(product)"
+                >
+                    {{ 'BUTTON_ADD_TO_CART'|translate }}
+                </button>
+                <button
+                    type="button"
+                    class="product-card__wishlist"
+                    [class.product-card__wishlist--loading]="wishlist.inProgress"
+                    (click)="AddToWishList(product)"
+                >
+                    <app-icon icon="wishlist-16" ></app-icon>
+                    <span>{{ 'BUTTON_ADD_TO_WISHLIST'|translate }}</span>
+                </button>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-container>

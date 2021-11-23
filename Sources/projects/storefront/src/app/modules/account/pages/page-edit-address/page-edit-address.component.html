@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-header">
+        <h5>{{ (addressId ? 'HEADER_EDIT_ADDRESS' : 'HEADER_NEW_ADDRESS')|translate }}</h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-body card-body--padding--2">
+        <div class="row no-gutters">
+            <div class="col-12 col-lg-10 col-xl-8" [formGroup]="form">
+                <!-- <app-address-form formControlName="address"></app-address-form> -->
+                <ng-container>
+                    <input type="hidden" formControlName="BUYER_ADDRESS_ID" />
+                    <input type="hidden" formControlName="BUYER_ID" />
+                    <div class="form-group">
+                        <label>{{ 'INPUT_COUNTRY_LABEL'|translate }}
+                            <!-- <span class="text-muted">({{ 'TEXT_OPTIONAL'|translate }})</span> -->
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="COUNTRY"
+                            disabled
+                            [placeholder]="'INPUT_FIRST_NAME_PLACEHOLDER'|translate"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'INPUT_CITY_LABEL'|translate }}</label>
+                        <select
+                            class="form-control"
+                            formControlName="CITY"
+                        >
+                            <option value="">{{ 'INPUT_CITY_PLACEHOLDER'|translate }}</option>
+                            <option *ngFor="let city of cities$ | async" [value]="city.Location_Name_En">
+                                {{ city.Location_Name_En }}
+                            </option>
+                        </select>
+                        <!-- <div class="invalid-feedback">
+                            <div *ngIf="form.controls.country|hasError:'required'">
+                                {{ 'ERROR_FORM_REQUIRED'|translate }}
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'INPUT_STREET_ADDRESS_LABEL'|translate }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="STREET"
+                            [placeholder]="'INPUT_STREET_ADDRESS_PLACEHOLDER_1'|translate"
+                        >
+                        <!-- <div class="invalid-feedback">
+                            <div *ngIf="form.controls.address1|hasError:'required'">
+                                {{ 'ERROR_FORM_REQUIRED'|translate }}
+                            </div>
+                        </div>
+                        <label class="sr-only">{{ 'INPUT_STREET_ADDRESS_LABEL'|translate }}</label>
+                        <input
+                            type="text"
+                            class="form-control mt-2"
+                            formControlName="address2"
+                            [placeholder]="'INPUT_STREET_ADDRESS_PLACEHOLDER_2'|translate"
+                        > -->
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'INPUT_BUILDING_LABEL'|translate }}</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="BUILDING"
+                            [placeholder]="'INPUT_BUILDING_PLACEHOLDER'|translate"
+                        >
+                        <!-- <div class="invalid-feedback">
+                            <div *ngIf="form.controls.city|hasError:'required'">
+                                {{ 'ERROR_FORM_REQUIRED'|translate }}
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label>{{ 'INPUT_FLOOR_LABEL'|translate }}</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            formControlName="FLOOR"
+                            min = -2
+                            [placeholder]="'INPUT_FLOOR_PLACEHOLDER'|translate"
+                        >
+                        <!-- <div class="invalid-feedback">
+                            <div *ngIf="form.controls.state|hasError:'required'">
+                                {{ 'ERROR_FORM_REQUIRED'|translate }}
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                            <label>{{ 'INPUT_LANDLINE_LABEL'|translate }}</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                formControlName="LANDLINE_NUMBER"
+                                [placeholder]="'INPUT_LANDLINE_PLACEHOLDER'|translate"
+                            >
+                        </div>
+                        <div class="form-group col-md-6 mb-0">
+                            <label>{{ 'INPUT_PHONE_NUMBER_LABEL'|translate }}</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                formControlName="PHONE_NUMBER"
+                                [placeholder]="'INPUT_PHONE_NUMBER_PLACEHOLDER'|translate"
+                            >
+                        </div>
+                    </div>
+                </ng-container>
+
+                <!-- <div class="form-group mt-3">
+                    <div class="form-check">
+                        <app-checkbox
+                            class="form-check-input"
+                            formControlName="default"
+                            #cbDefault
+                        ></app-checkbox>
+                        <label class="form-check-label" [htmlFor]="cbDefault.inputId">
+                            {{ 'INPUT_SET_AS_MY_DEFAULT_ADDRESS_LABEL'|translate }}
+                        </label>
+                    </div>
+                </div> -->
+
+                <div class="form-group mb-0 pt-3 mt-3">
+                    <button
+                        class="btn btn-primary"
+                        [class.btn-loading]="saveInProgress"
+                        (click)="saveNewAddress()"
+                    >{{ 'BUTTON_SAVE'|translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

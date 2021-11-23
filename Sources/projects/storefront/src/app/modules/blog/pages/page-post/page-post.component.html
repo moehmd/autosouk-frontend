@@ -1,0 +1,133 @@
+<ng-template #sidebar>
+    <div class="post-view__item post-view__item-sidebar">
+        <app-blog-sidebar></app-blog-sidebar>
+    </div>
+</ng-template>
+
+<div class="block post-view">
+    <div class="post-view__header post-header" [ngClass]="{'post-header--has-image': hasImage}">
+        <div *ngIf="hasImage" class="post-header__image" [ngStyle]="{
+            'background-image': 'url(assets/images/b3ayne.png)'
+        }"></div>
+        <div class="post-header__body">
+            <div class="post-header__categories">
+                <ul class="post-header__categories-list">
+                    <li class="post-header__categories-item">
+                        <a href="" class="post-header__categories-link">Latest News</a>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="post-header__title">Book your turn on any available station you like !</h1>
+            <div class="post-header__meta">
+                <ul class="post-header__meta-list">
+                    <li class="post-header__meta-item">By <a href="" class="post-header__meta-link">Auto Souk</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <app-decor class="post-header__decor" type="bottom"></app-decor>
+    </div>
+    <!-- <app-block-space layout="before-footer"></app-block-space> -->
+    <div class="container">
+        <div class="post-view__body">
+            <!-- <ng-container *ngIf="sidebarPosition === 'start'">
+                <ng-container *ngTemplateOutlet="sidebar"></ng-container>
+            </ng-container> -->
+            <div class="post-view__item post-view__item-post">
+                <div class="post-view__card post">
+                    <div class="post__body typography">
+                        <p>
+                            {{'QUOTES_STATION'|translate }}
+                        </p>
+                        <blockquote>
+                            <p>
+                               {{'STATION_COMMENT'|translate}}
+                            </p>
+                            <p><cite>Autosouk Team</cite></p>
+                        </blockquote>
+                        <div class="form-group col-md-12">
+                            <label for="comment-first-name" style="font-size: large;">Pick your Date</label>
+                            <input type="date" class="form-control" placeholder="date time">
+                        </div>
+                        <div class="form-group mb-0" style="display: flex; justify-content: flex-end;">
+                            <button type="submit" class="btn btn-primary mt-md-4 mt-2">Search for stations</button>
+                        </div>
+                        <!-- <div style="display: flex; justify-content: center;">
+                            <img src="assets/images/under-construction.jpg"/>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-block-space layout="before-footer"></app-block-space>
+        <ng-container>
+            <div class="products-view__options view-options"
+                [class.view-options--offcanvas--always]="offCanvasSidebar === 'always'"
+                [class.view-options--offcanvas--mobile]="offCanvasSidebar === 'mobile'">
+                <div class="view-options__body">
+                    <!-- <button type="button" class="view-options__filters-button filters-button" (click)="sidebar.open()">
+                        <span class="filters-button__icon">
+                            <app-icon icon="filters-16"></app-icon>
+                        </span>
+                        <span class="filters-button__title">{{ 'BUTTON_FILTERS'|translate }}</span>
+                        <span class="filters-button__counter">{{ currentFiltersCount$|async }}</span>
+                    </button>  -->
+
+                    <div class="view-options__layout layout-switcher">
+                        <div class="layout-switcher__list">
+                            <button *ngFor="let layoutButton of layoutButtons" type="button"
+                                class="layout-switcher__button"
+                                [class.layout-switcher__button--active]="layoutButton.layout === layout"
+                                (click)="setLayout(layoutButton.layout)">
+                                <app-icon [icon]="layoutButton.icon"></app-icon>
+                            </button>
+                        </div>
+                    </div> 
+
+                    <div class="view-options__spring"></div>
+
+                    <!-- <div class="view-options__select">
+                        <label for="view-option-sort">{{ 'INPUT_SORT_LABEL'|translate }}:</label>
+                        <select id="view-option-sort" class="form-control form-control-sm" [formControl]="sortControl">
+                            <option value="default">{{ 'INPUT_SORT_OPTION_DEFAULT'|translate }}</option>
+                            <option value="asc">{{ 'INPUT_SORT_OPTION_NAME_ASC'|translate }}</option>
+                            <option value="desc">{{ 'INPUT_SORT_OPTION_NAME_DESC'|translate }}</option>
+                        </select>
+                    </div> -->
+                </div>
+
+                <!-- <div class="view-options__body view-options__body--filters" *ngIf="hasActiveFilters$|async">
+                    <div class="view-options__label">{{ 'TEXT_ACTIVE_FILTERS'|translate }}</div>
+                    <div class="view-options__applied-filters applied-filters">
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="products-view__list products-list"
+                [attr.data-layout]="layout === 'grid-with-features' ? 'grid' : layout"
+                [attr.data-with-features]="layout == 'grid-with-features' ? 'true' : 'false'"
+                [class.products-list--grid--6]="gridLayout === 'grid-6-full'"
+                [class.products-list--grid--5]="gridLayout === 'grid-5-full'"
+                [class.products-list--grid--4]="['grid-4-full', 'grid-4-sidebar'].includes(gridLayout)"
+                [class.products-list--grid--3]="gridLayout === 'grid-3-sidebar'">
+                <div class="products-list__head">
+                    <div class="products-list__column products-list__column--image">{{ 'TABLE_IMAGE'|translate }}</div>
+                    <div class="products-list__column products-list__column--meta">{{ 'STATION'|translate }}</div>
+                    <div class="products-list__column products-list__column--product">{{ 'OPEN_DATE'|translate }}</div>
+                    <div class="products-list__column products-list__column--rating">{{ 'CLOSE_DATE'|translate }}</div>
+                    <!-- <div class="products-list__column products-list__column--price">{{ 'TABLE_PRICE'|translate }}</div> -->
+                </div>
+                <div class="products-list__content">
+                    <!-- *ngFor="let product of NewFilteredProducts" -->
+                    <div  class="products-list__item">
+                        <app-station-card></app-station-card>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-view__pagination">
+            </div>
+        </ng-container>
+    </div>
+</div>
+<app-block-space layout="before-footer"></app-block-space>

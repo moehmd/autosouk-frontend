@@ -1,0 +1,46 @@
+<div class="vehicle-select__list">
+
+    <div class="vehicle-select__item">
+        <select class="vehicle-select__item-control"
+            [(ngModel)]="selectedCategory" (ngModelChange)="UpdateCategory($event)">
+            <option [value]="" selected disabled>Select a Category</option>
+            <option *ngFor="let option of CategoryList" [value]="option.CATEGORY_ID">
+                {{ option.NAME }}
+            </option>
+        </select>
+        <div class="vehicle-select__item-loader"></div>
+    </div>
+
+    <div class="vehicle-select__item">
+        <select class="vehicle-select__item-control" [(ngModel)]="selectedBrand" (ngModelChange)="GetModelByBrand($event)">
+            <option [value]="" selected disabled>Select a Brand</option>
+            <option *ngFor="let option of BrandList" [value]="option.BRAND_ID">
+                {{ option.NAME }}
+            </option>
+        </select>
+        <div class="vehicle-select__item-loader"></div>
+    </div>
+
+    <div class="vehicle-select__item">
+        <select class="vehicle-select__item-control" [disabled]="selectedBrand == 'Select a Brand'"
+            [(ngModel)]="selectedModel" (ngModelChange)="UpdateModel($event)">
+            <option [value]="" selected disabled>Select a Model</option>
+            <option *ngFor="let option of ModelList" [value]="option.MODEL_ID">
+                {{ option.NAME }}
+            </option>
+        </select>
+        <div class="vehicle-select__item-loader"></div>
+    </div>
+
+    
+    <div class="vehicle-select__item">
+        <select class="vehicle-select__item-control" [(ngModel)]="selectedYear" (ngModelChange)="SendSelectedValues($event)" >
+            <option [value]="" selected disabled>Select a Year</option>
+            <option *ngFor="let option of YearList" [value]="option.YEAR_ID">
+                {{ option.NAME }}
+            </option>
+        </select>
+        <div class="vehicle-select__item-loader"></div>
+    </div>
+
+</div>

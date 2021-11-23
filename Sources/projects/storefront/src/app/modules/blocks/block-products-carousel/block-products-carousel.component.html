@@ -1,0 +1,33 @@
+<div class="container">
+    <app-section-header
+        [sectionTitle]="'CAROUSEL_PRODUCTS_AS_LATEST'|translate"
+        [arrows]="true"
+        [currentGroup]="currentGroup"
+        [links]="links"
+        (next)="moveNext()"
+        (prev)="movePrev()"
+        (changeGroup)="changeGroup.emit($any($event))"
+    ></app-section-header>
+
+    <div
+        *ngIf="showCarousel"
+        class="block-products-carousel__carousel"
+        [class.block-products-carousel__carousel--loading]="loading"
+        [class.block-products-carousel__carousel--has-items]="columns.length > 0"
+    >
+        <div class="block-products-carousel__carousel-loader"></div>
+
+        <owl-carousel-o [options]="carouselOptions" appOwlPreventClick>
+            <ng-template *ngFor="let column of columns" carouselSlide>
+                <div class="block-products-carousel__column">
+                    <app-product-card
+                        class="block-products-carousel__cell"
+                        [product]="column"
+                        [layout]="productCardLayout"
+                        [exclude]="productCardExclude"
+                    ></app-product-card>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

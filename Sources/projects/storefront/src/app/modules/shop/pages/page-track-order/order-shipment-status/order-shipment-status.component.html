@@ -1,0 +1,43 @@
+
+<section class="root" >
+    <figure>
+      <img src="assets/images/tracking.png" alt="">
+      <figcaption>
+        <h4>Tracking Details</h4>
+        <h6>Order Serial Number</h6>
+        <h2>#{{data[0].My_Order_item.SERIAL_NB}}</h2>
+      </figcaption>
+    </figure>
+    <div class="order-track" *ngFor="let item of data">
+      <div class="order-track-step">
+        <div class="order-track-status">
+          <span class="order-track-status-dot"></span>
+          <span class="order-track-status-line"></span>
+        </div>
+        <div class="order-track-text">
+          <p class="order-track-text-stat">{{item.My_Status.STATUS_TYPE}}</p>
+          <span class="order-track-text-sub">{{item.ENTRY_DATE}}</span>
+        </div>
+      </div>
+      <!-- <div class="order-track-step">
+        <div class="order-track-status">
+          <span class="order-track-status-dot"></span>
+          <span class="order-track-status-line"></span>
+        </div>
+        <div class="order-track-text">
+          <p class="order-track-text-stat">On the way</p>
+          <span class="order-track-text-sub">1st November, 2019</span>
+        </div>
+      </div>
+      <div class="order-track-step">
+        <div class="order-track-status">
+          <span class="order-track-status-dot"></span>
+          <span class="order-track-status-line"></span>
+        </div>
+        <div class="order-track-text">
+          <p class="order-track-text-stat">Delivered</p>
+          <span class="order-track-text-sub">3rd November, 2019</span>
+        </div>
+      </div> -->
+    </div>
+  </section>
